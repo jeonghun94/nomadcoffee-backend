@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node server"
+    "dev": "nodemon --exec babel-node server",
+    "push": "npx prisma db push"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,10 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@prisma/client": "^3.11.1",
     "apollo-server": "^3.6.6",
-    "graphql": "^16.3.0"
+    "dotenv": "^16.0.0",
+    "graphql": "^16.3.0",
+    "prisma": "^3.11.1"
   }
 }
