@@ -5,35 +5,40 @@ export default {
   Mutation: {
     createAccount: async (
       _,
-      { firstName, lastName, userName, email, password }
+      { userName, email, name, location, password, avatarURL, githubUserName }
     ) => {
-      const existingUser = await client.user.findFirst({
-        where: {
-          OR: [
-            {
-              userName,
-            },
-            {
-              email,
-            },
-          ],
-        },
-      });
-
-      if (existingUser) {
-        console.log("User already exists");
-      } else {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        await client.user.create({
-          data: {
-            firstName,
-            lastName,
-            userName,
-            email,
-            password: hashedPassword,
+      try {
+        const existingUser = await client.user.findFirst({
+          where: {
+            OR: [
+              {
+                userName,
+              },
+              {
+                email,
+              },
+            ],
           },
         });
-        console.log("User created");
+
+        if (existingUser) {
+          throw new Error("User already exists");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        return client.user.create({
+          data: {
+            userName,
+            email,
+            name,
+            location,
+            password: hashedPassword,
+            avatarURL,
+            githubUserName,
+          },
+        });
+      } catch (e) {
+        return e;
       }
     },
 

@@ -9,11 +9,13 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  firstName String 
-  lastName String?
   userName String @unique
   email String @unique
+  name String
+  location String
   password String 
+  avatarURL String?
+  githubUserName String?
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
