@@ -5,7 +5,7 @@ export default {
   Mutation: {
     createAccount: async (
       _,
-      { firstName, lastName, username, email, password }
+      { username, email, name, location, password, avatarURL, githubUserName }
     ) => {
       try {
         const existingUser = await client.user.findFirst({
@@ -23,14 +23,16 @@ export default {
         if (existingUser) {
           throw new Error("This username/password is already taken.");
         }
-        const uglyPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         return client.user.create({
           data: {
             username,
             email,
-            firstName,
-            lastName,
-            password: uglyPassword,
+            name,
+            location,
+            password: hashedPassword,
+            avatarURL,
+            githubUserName,
           },
         });
       } catch (e) {
