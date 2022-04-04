@@ -16,6 +16,9 @@ model User {
   password String 
   avatarURL String?
   githubUserName String?
+  followers User[]   @relation("FollowerRelation", references: [id])
+  following User[]   @relation("FollowerRelation", references: [id])
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
+
 }
