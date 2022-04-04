@@ -13,7 +13,7 @@ export default {
       if (!ok) {
         return {
           ok: false,
-          error: "User not found",
+          error: "user not found",
         };
       }
       // 해당 유저의 팔로워 목록을 가져온다.
