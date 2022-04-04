@@ -17,9 +17,6 @@ export default {
             error: "User not found",
           };
         }
-
-        console.log(ok);
-
         await client.user.update({
           where: {
             id: loggedInUser.id,
