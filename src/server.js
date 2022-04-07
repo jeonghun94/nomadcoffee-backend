@@ -4,6 +4,7 @@ import { ApolloServer } from "apollo-server-express";
 import { graphqlUploadExpress } from "graphql-upload";
 import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/users.utils";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import logger from "morgan";
 
 const PORT = process.env.PORT || 4000;
@@ -12,8 +13,8 @@ const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    playground: true,
     introspection: true,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
     context: async ({ req }) => {
       return {
         loggedInUser: await getUser(req.headers.token),
