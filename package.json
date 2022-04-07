@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node server",
-    "push": "npx prisma db push"
+    "dev": "nodemon --exec babel-node src/server",
+    "push": "npx prisma db push",
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,9 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/plugin-transform-regenerator": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.6",
     "@graphql-tools/schema": "^8.3.5",
