@@ -9,6 +9,7 @@ export default {
         { name, latitude, longitude, photoUrls, categories },
         { loggedInUser: { id } }
       ) => {
+        console.log(id);
         const user = await client.user.findUnique({ where: { id } });
         if (!user) {
           return {
@@ -17,7 +18,7 @@ export default {
           };
         }
 
-        // console.log(name, latitude, longitude, photoUrls, categories);
+        console.log(name, latitude, longitude, photoUrls, categories);
 
         const shop = await client.CoffeeShop.findUnique({
           where: {

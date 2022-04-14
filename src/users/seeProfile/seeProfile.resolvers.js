@@ -1,16 +1,19 @@
 import client from "../../client";
+import jwt from "jsonwebtoken";
 
 export default {
   Query: {
-    seeProfile: (_, { username }) =>
-      client.user.findUnique({
+    seeProfile: (_, { token }) => {
+      const { id } = jwt.verify(token, process.env.SECRET_KEY);
+      return client.user.findUnique({
         where: {
-          username,
+          id,
         },
         include: {
           following: true,
           followers: true,
         },
-      }),
+      });
+    },
   },
 };

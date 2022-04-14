@@ -74,7 +74,7 @@ model CoffeeShop {
 model CoffeeShopPhoto{
   id     Int  @id @default(autoincrement())
   url    String
-  shop   CoffeeShop @relation(fields: [shopId], references: [id])
+  shop   CoffeeShop @relation(fields: [shopId], references: [id], onDelete: Cascade)
   shopId Int
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt

@@ -22,6 +22,7 @@ const startServer = async () => {
     },
   });
 
+  console.log(process.cwd());
   await server.start();
   const app = express();
   // app.use(logger("tiny"));

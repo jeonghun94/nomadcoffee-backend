@@ -4,8 +4,12 @@ export default {
   Query: {
     seeCoffeeShops: async (_, { page }) => {
       return await client.coffeeShop.findMany({
-        take: 1,
-        skip: (page - 1) * 1,
+        take: 5,
+        skip: (page - 1) * 5,
+        include: {
+          categories: true,
+          photos: true,
+        },
       });
     },
 
@@ -13,6 +17,8 @@ export default {
       const coffeeShop = await client.coffeeShop.findUnique({
         where: { id },
       });
+
+      console.log(id);
 
       if (!coffeeShop) {
         return {
