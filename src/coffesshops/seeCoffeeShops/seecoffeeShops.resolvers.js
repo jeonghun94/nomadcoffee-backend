@@ -18,8 +18,6 @@ export default {
         where: { id },
       });
 
-      console.log(id);
-
       if (!coffeeShop) {
         return {
           name: "coffeeShop not found",
@@ -28,6 +26,10 @@ export default {
 
       return await client.coffeeShop.findUnique({
         where: { id },
+        include: {
+          categories: true,
+          photos: true,
+        },
       });
     },
   },

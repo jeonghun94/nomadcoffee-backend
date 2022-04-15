@@ -24,7 +24,6 @@ export default {
             },
           },
         });
-
         // 커피샵을 못찾았을 때
         if (!coffeeShop) {
           return {
@@ -40,32 +39,35 @@ export default {
           };
         }
 
-        const urlObj = photoUrls.map((url) => ({
+        const urlObj = photoUrls?.map((url) => ({
           url,
         }));
 
-        const categoriesObj = categories.map((name) => ({
+        const categoriesObj = categories?.map((name) => ({
           where: {
             name,
           },
           create: { name },
         }));
-
         // coffee shop 업데이트 처리
-        await client.coffeeShop.update({
+        const d = await client.coffeeShop.update({
           where: { id },
           data: {
             name,
             latitude,
             longitude,
-            photos: {
-              delete: coffeeShop.photos,
-              create: urlObj,
-            },
-            categories: {
-              disconnect: coffeeShop.categories,
-              connectOrCreate: categoriesObj,
-            },
+            ...(photoUrls && {
+              photos: {
+                delete: coffeeShop.photos,
+                create: urlObj,
+              },
+            }),
+            ...(categories && {
+              categories: {
+                disconnect: coffeeShop.categories,
+                connectOrCreate: categoriesObj,
+              },
+            }),
           },
         });
 
