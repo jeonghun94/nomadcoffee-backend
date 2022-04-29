@@ -25,7 +25,7 @@ const startServer = async () => {
   console.log(process.cwd());
   await server.start();
   const app = express();
-  // app.use(logger("tiny"));
+  app.use(logger("tiny"));
   app.use(graphqlUploadExpress());
   app.use("/static", express.static("uploads"));
   server.applyMiddleware({ app });
