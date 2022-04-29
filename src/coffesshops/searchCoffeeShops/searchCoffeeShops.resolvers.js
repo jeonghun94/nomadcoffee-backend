@@ -3,6 +3,7 @@ import client from "../../client";
 export default {
   Query: {
     searchCoffeeShops: async (_, { keyword }) => {
+      console.log(keyword);
       let coffeeShops;
       coffeeShops = await client.coffeeShop.findMany({
         where: {
