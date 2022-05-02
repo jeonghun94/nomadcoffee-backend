@@ -17,9 +17,7 @@ const resolverFn = async (
     const writeStream = createWriteStream(
       process.cwd() + "/uploads/" + newFilename
     );
-    console.log("dsd");
     readStream.pipe(writeStream);
-    console.log("sdsdddd");
     newAvatarUrl = `http://localhost:4000/static/${newFilename}`;
   }
 
