@@ -3,7 +3,7 @@ import { protectedResolver } from "../users.utils";
 import { createWriteStream } from "fs";
 import bcrypt from "bcrypt";
 import client from "../../client";
-import { uploadPhoto } from "../../../shared/shared.utils";
+import { uploadPhoto } from "../../shared/shared.utils";
 
 const resolverFn = async (
   _,
