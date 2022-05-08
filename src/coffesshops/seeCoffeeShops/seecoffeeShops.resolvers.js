@@ -4,7 +4,7 @@ export default {
   Query: {
     seeCoffeeShops: async (_, { page }) => {
       return await client.coffeeShop.findMany({
-        take: 2,
+        take: 3,
         skip: page,
         include: {
           categories: true,
