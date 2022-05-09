@@ -60,6 +60,7 @@ export default {
             //     create: urlObj,
             //   },
             // }),
+
             ...(categories && {
               categories: {
                 disconnect: coffeeShop.categories,
