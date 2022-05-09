@@ -9,6 +9,7 @@ export default {
         { id, name, latitude, longitude, photoUrls, categories },
         { loggedInUser }
       ) => {
+        console.log(id, name, latitude, longitude, photoUrls, categories);
         const coffeeShop = await client.coffeeShop.findUnique({
           where: { id },
           include: {
@@ -17,13 +18,10 @@ export default {
                 name: true,
               },
             },
-            photos: {
-              select: {
-                id: true,
-              },
-            },
           },
         });
+
+        console.log(coffeeShop);
         // 커피샵을 못찾았을 때
         if (!coffeeShop) {
           return {
@@ -56,12 +54,12 @@ export default {
             name,
             latitude,
             longitude,
-            ...(photoUrls && {
-              photos: {
-                delete: coffeeShop.photos,
-                create: urlObj,
-              },
-            }),
+            // ...(photoUrls && {
+            //   photos: {
+            //     delete: coffeeShop.photos,
+            //     create: urlObj,
+            //   },
+            // }),
             ...(categories && {
               categories: {
                 disconnect: coffeeShop.categories,

@@ -64,21 +64,21 @@ model CoffeeShop {
   longitude String
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  photos    CoffeeShopPhoto[]
+  photos String
   categories Category[]
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
   @@unique([name, latitude, longitude])
 }
 
-model CoffeeShopPhoto{
-  id     Int  @id @default(autoincrement())
-  url    String
-  shop   CoffeeShop @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  shopId Int
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-}
+// model CoffeeShopPhoto{
+//   id     Int  @id @default(autoincrement())
+//   url    String
+//   shop   CoffeeShop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+//   shopId Int
+//   createAt DateTime @default(now())
+//   updateAt DateTime @updatedAt
+// }
 
 model Category{
   id     Int  @id @default(autoincrement())

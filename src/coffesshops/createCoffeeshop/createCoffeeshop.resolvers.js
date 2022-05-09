@@ -1,4 +1,5 @@
 import client from "../../client";
+import { uploadPhoto } from "../../shared/shared.utils";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -9,7 +10,6 @@ export default {
         { name, latitude, longitude, photoUrls, categories },
         { loggedInUser: { id } }
       ) => {
-        console.log(id);
         const user = await client.user.findUnique({ where: { id } });
         if (!user) {
           return {
@@ -17,8 +17,6 @@ export default {
             error: "No user found",
           };
         }
-
-        console.log(name, latitude, longitude, photoUrls, categories);
 
         const shop = await client.CoffeeShop.findUnique({
           where: {
@@ -37,9 +35,17 @@ export default {
           };
         }
 
-        const urlObj = photoUrls.map((url) => ({
-          url,
-        }));
+        let shopUrl = null;
+        console.log(photoUrls);
+        if (photoUrls) {
+          shopUrl = await uploadPhoto(photoUrls, id);
+        }
+
+        console.log(shopUrl);
+        // const urlObj = photoUrls.map((url) => ({
+        //   url,
+        // }));
+
         const categoriesObj = categories.map((name) => ({
           where: {
             name,
@@ -47,21 +53,16 @@ export default {
           create: { name },
         }));
 
-        // console.log(urlObj);
-        console.log(categoriesObj);
-
         await client.CoffeeShop.create({
           data: {
             name,
             latitude,
             longitude,
+            photos: shopUrl,
             user: {
               connect: {
                 id,
               },
-            },
-            photos: {
-              create: urlObj,
             },
             categories: {
               connectOrCreate: categoriesObj,

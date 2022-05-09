@@ -8,9 +8,6 @@ export default {
   Category: {
     totalShops: () => client.Category.count(),
     shops: async ({ name }, { page }, { loggedInUser }) => {
-      console.log(name);
-      console.log(page);
-
       if (!page) {
         return client.CoffeeShop.findMany({
           where: {

@@ -5,10 +5,9 @@ export default {
     seeCoffeeShops: async (_, { page }) => {
       return await client.coffeeShop.findMany({
         take: 3,
-        skip: page,
+        skip: 0,
         include: {
           categories: true,
-          photos: true,
         },
       });
     },
@@ -28,7 +27,6 @@ export default {
         where: { id },
         include: {
           categories: true,
-          photos: true,
         },
       });
     },

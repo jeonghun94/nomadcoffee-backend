@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 export default gql`
   type CoffeeShopPhoto {
     id: Int
-    url: String
+    url: Upload
     shop: CoffeeShop
   }
 
@@ -13,7 +13,7 @@ export default gql`
     latitude: String
     longitude: String
     user: User
-    photos: [CoffeeShopPhoto]!
+    photos: String
     categories: [Category]!
   }
 

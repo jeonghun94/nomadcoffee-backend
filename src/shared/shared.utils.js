@@ -8,9 +8,6 @@ AWS.config.update({
 });
 
 export const uploadPhoto = async (file, userId) => {
-  console.log(process.env.AWS_KEY);
-  console.log(process.env.AWS_SECRET);
-
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
   const objectName = `${userId}-${Date.now()}-${filename}`;
